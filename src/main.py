@@ -1,6 +1,5 @@
 from pynput.keyboard import Key, Listener
 from time import time, sleep
-import linecache
 
 
 def on_press(key):
