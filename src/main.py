@@ -74,7 +74,7 @@ def count_keys(total_log, total_backspaces):
 
 def save_avg(average, accuracy, cpm):
     with open("average.txt", "w") as write_avg:
-        message = f"Average is: {average}CPM\nWith an accuracy of: {accuracy}%\nAverage with 100% accuracy: {cpm}CPM"
+        message = f"Average is: {round(average, 0)}CPM\nWith an accuracy of: {accuracy}%\nAverage with 100% accuracy: {cpm}CPM"
         write_avg.write(message)
 
 def main(): 
