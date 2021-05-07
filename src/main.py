@@ -53,7 +53,7 @@ def count_keys(total_log, total_backspaces):
     This relies on the average amount of letters in a word and differs per language."""
 
     # Print cpm to terminal for testing purposes 
-    print(f"CPM is: {corr_cpm}. with an accuracy of: {typing_accuracy}")
+    print(f"CPM is: {corr_cpm}. with an accuracy of: {round(typing_accuracy, 2)}")
     if typing_accuracy < 100:
         print(f"CPM can be improved to {cpm} if accuracy is 100%")
     else: 
@@ -72,7 +72,7 @@ def count_keys(total_log, total_backspaces):
     else:
         avg = (avg_new+avg_old)/2
         print(f"average is: {int(round(avg, 0))}")
-        save_avg(str(round(avg)), str(typing_accuracy), str(cpm))
+        save_avg(str(round(avg)), str(round(typing_accuracy, 2)), str(cpm))
         return avg
 
 def save_avg(average, accuracy, cpm):
