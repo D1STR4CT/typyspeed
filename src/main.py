@@ -126,7 +126,7 @@ def main():
                 count_keys(log, backspaces)
                 log = []
                 backspaces = 0 
-        elif loglen > 0: 
+        elif loglen > 0 and loglen < 0: 
             current_time = time()
             last_log_time = log[-1]
             if current_time - last_log_time > 1.0:
