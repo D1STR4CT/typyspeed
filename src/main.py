@@ -2,9 +2,15 @@ from pynput.keyboard import Key, Listener
 from time import time, sleep
 
 def on_press(key):
-    global log
-    log.append(time())
-    return log
+    if key == Key.backspace:
+        global backspaces 
+        backspaces += 1 # VS Code sees this as an error but it works 
+        return backspaces
+    else: 
+        global log
+        log.append(time())
+        return log
+    
 
 def on_release(key):
     if key == Key.esc:
@@ -12,28 +18,53 @@ def on_release(key):
         print(avg)
         return False
 
-def count_keys(total_log):
+def count_keys(total_log, total_backspaces):
     
+    # Define variables used in function calculations 
     total_presses = len(total_log)
 
     starttime = total_log[1]
     endtime = total_log[-1]
-    
+
+    total_errors = total_backspaces
+
+    # Reset tracking variables for next loop actually not even sure if this is used
     global log 
     log = []
+    global backspaces
+    backspaces = 0 
 
+    # Calculate total time of typing activity for "burst"
     total_time = float(endtime) - float(starttime)
 
+    # Calculate CPM without error correction
     cps = total_presses/total_time
     cpm = cps*60
 
+    # Calculate CPM with errors correction 
+    corr_presses = total_presses - total_errors
+    corr_cps = corr_presses/total_time
+    corr_cpm = corr_cps*60
+
+    # Calculate accuracy
+    typing_accuracy = (corr_presses/total_presses)*100
+
+    """A calculation to view words per minute (WPM) will be added later.
+    This relies on the average amount of letters in a word and differs per language."""
+
+    # Print cpm to terminal for testing purposes 
+    print(f"CPM is: {corr_cpm}. with an accuracy of: {typing_accuracy}")
+    print(f"CPM can be improved to {cpm} if accuracy is 100%")
+
+    """old piece of code I'm leaving in here for possible future testing"""
     print(f"{total_presses} keys in {int(round(total_time, 0))}. CPM: {int(round(cpm, 0))}")
+
     global avg
-    avg_new = cpm 
+    avg_new = corr_cpm 
     avg_old = avg
 
     if avg == 0:
-        avg = cpm 
+        avg = corr_cpm 
         return avg 
     else:
         avg = (avg_new+avg_old)/2
@@ -50,6 +81,8 @@ def main():
     log = []
     global avg
     avg = 0.0
+    global backspaces
+    backspaces = 0 
 
     """ old piece of code I'm leaving in here in case I need it"""
     # with Listener(
@@ -67,10 +100,16 @@ def main():
         if loglen > 5:
             current_time = time()
             last_log_time = log[-1]
-            if current_time - last_log_time > 2.0:
-                count_keys(log)
+            if current_time - last_log_time > 1.0:
+                count_keys(log, backspaces)
                 log = []
-
+                backspaces = 0 
+        elif loglen > 0: 
+            current_time = time()
+            last_log_time = log[-1]
+            if current_time - last_log_time > 1.0:
+                log = []
+                backspaces = 0
 
 if __name__ == "__main__":
     main()
