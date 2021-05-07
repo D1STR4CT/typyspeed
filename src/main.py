@@ -63,22 +63,32 @@ def count_keys(total_log, total_backspaces):
     # print(f"{total_presses} keys in {int(round(total_time, 0))}. CPM: {int(round(cpm, 0))}")
 
     global avg
-    avg_new = corr_cpm 
+    avg_new = cpm 
     avg_old = avg
+    global corr_avg 
+    corr_avg_new = corr_cpm
+    corr_avg_old = corr_avg # ignore IDE if it says corr_avg is undefined
+    global avg_accuracy 
+    accuracy_new = typing_accuracy
+    accuracy_old = avg_accuracy # ignore IDE if it says avg_accuracy is undefined
 
     if avg == 0:
-        avg = corr_cpm 
-        return avg 
+        avg = cpm 
+        corr_avg = corr_cpm
+        avg_accuracy = accuracy_new
+        # return avg 
     else:
         avg = (avg_new+avg_old)/2
+        corr_avg = (corr_avg_new+corr_avg_old)/2
+        avg_accuracy = (accuracy_new/accuracy_old)/2
         print(f"average is: {int(round(avg, 0))}")
-        save_avg(round(avg), round(typing_accuracy, 2), cpm)
-        return avg
+        save_avg(round(corr_avg), round(accuracy_new, 2), avg)
+        # return avg
 
-def save_avg(average, accuracy, cpm):
+def save_avg(corrected_average, accuracy, average):
     with open("average.txt", "w") as write_avg:
-        if cpm < 100:
-            message = f"Average is: {average}CPM\nWith an accuracy of: {accuracy}%\nAverage with 100% accuracy: {cpm}CPM"
+        if accuracy < 100:
+            message = f"Average is: {corrected_average}CPM\nWith an accuracy of: {accuracy}%\nAverage with 100% accuracy: {round(average)}CPM"
             write_avg.write(message)
         else: 
             message = f"Average is: {average}CPM\nWith an accuracy of: {accuracy}%"
@@ -89,6 +99,10 @@ def main():
     log = []
     global avg
     avg = 0.0
+    global corr_avg
+    corr_avg = 0.0
+    global avg_accuracy 
+    avg_accuracy = 100.0
     global backspaces
     backspaces = 0 
 
