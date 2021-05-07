@@ -1,7 +1,6 @@
 from pynput.keyboard import Key, Listener
 from time import time, sleep
 
-
 def on_press(key):
     global log
     log.append(time())
@@ -39,29 +38,39 @@ def count_keys(total_log):
     else:
         avg = (avg_new+avg_old)/2
         print(f"average is: {int(round(avg, 0))}")
+        save_avg(str(avg))
         return avg
 
+def save_avg(average):
+    with open("average.txt", "w") as write_avg:
+        write_avg.write(average)
 
-log = []
-global avg
-avg = 0.0
+def main(): 
+    global log 
+    log = []
+    global avg
+    avg = 0.0
 
-# with Listener(
-#     on_press = on_press,
-#     on_release = on_release
-# ) as listener:
-#     listener.join()
+    """ old piece of code I'm leaving in here in case I need it"""
+    # with Listener(
+    #     on_press = on_press,
+    #     on_release = on_release
+    # ) as listener:
+    #     listener.join()
 
-listener = Listener(on_press=on_press, on_release=on_release)
+    listener = Listener(on_press=on_press, on_release=on_release)
 
-listener.start() 
+    listener.start() 
 
-while True:
-    loglen = len(log)
-    if loglen > 5:
-        current_time = time()
-        last_log_time = log[-1]
-        if current_time - last_log_time > 2.0:
-            count_keys(log)
-            log = []
+    while True:
+        loglen = len(log)
+        if loglen > 5:
+            current_time = time()
+            last_log_time = log[-1]
+            if current_time - last_log_time > 2.0:
+                count_keys(log)
+                log = []
 
+
+if __name__ == "__main__":
+    main()
