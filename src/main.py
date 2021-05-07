@@ -72,13 +72,17 @@ def count_keys(total_log, total_backspaces):
     else:
         avg = (avg_new+avg_old)/2
         print(f"average is: {int(round(avg, 0))}")
-        save_avg(str(round(avg)), str(round(typing_accuracy, 2)), str(cpm))
+        save_avg(round(avg), round(typing_accuracy, 2), cpm)
         return avg
 
 def save_avg(average, accuracy, cpm):
     with open("average.txt", "w") as write_avg:
-        message = f"Average is: {average}CPM\nWith an accuracy of: {accuracy}%\nAverage with 100% accuracy: {cpm}CPM"
-        write_avg.write(message)
+        if cpm < 100:
+            message = f"Average is: {average}CPM\nWith an accuracy of: {accuracy}%\nAverage with 100% accuracy: {cpm}CPM"
+            write_avg.write(message)
+        else: 
+            message = f"Average is: {average}CPM\nWith an accuracy of: {accuracy}%"
+            write_avg.write(message)
 
 def main(): 
     global log 
