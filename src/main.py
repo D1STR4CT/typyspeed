@@ -54,7 +54,10 @@ def count_keys(total_log, total_backspaces):
 
     # Print cpm to terminal for testing purposes 
     print(f"CPM is: {corr_cpm}. with an accuracy of: {typing_accuracy}")
-    print(f"CPM can be improved to {cpm} if accuracy is 100%")
+    if typing_accuracy < 100:
+        print(f"CPM can be improved to {cpm} if accuracy is 100%")
+    else: 
+        print("CPM can not be improved anymore by reducing errors!")
 
     """old piece of code I'm leaving in here for possible future testing"""
     # print(f"{total_presses} keys in {int(round(total_time, 0))}. CPM: {int(round(cpm, 0))}")
@@ -69,12 +72,12 @@ def count_keys(total_log, total_backspaces):
     else:
         avg = (avg_new+avg_old)/2
         print(f"average is: {int(round(avg, 0))}")
-        save_avg(str(avg), str(typing_accuracy), str(cpm))
+        save_avg(str(round(avg)), str(typing_accuracy), str(cpm))
         return avg
 
 def save_avg(average, accuracy, cpm):
     with open("average.txt", "w") as write_avg:
-        message = f"Average is: {round(average, 0)}CPM\nWith an accuracy of: {accuracy}%\nAverage with 100% accuracy: {cpm}CPM"
+        message = f"Average is: {average}CPM\nWith an accuracy of: {accuracy}%\nAverage with 100% accuracy: {cpm}CPM"
         write_avg.write(message)
 
 def main(): 
