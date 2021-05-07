@@ -4,7 +4,7 @@ from time import time, sleep
 def on_press(key):
     if key == Key.backspace:
         global backspaces 
-        backspaces += 1 # VS Code sees this as an error but it works 
+        backspaces = backspaces + 1 
         return backspaces
     else: 
         global log
