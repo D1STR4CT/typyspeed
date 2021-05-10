@@ -84,7 +84,7 @@ def count_keys():
     if typing_accuracy < 100:
         print(f"CPM can be improved to {round(cpm)} if accuracy is 100%")
     else: 
-        print("CPM can not be improved anymore by reducing errors!")
+        print("CPM can not be improved anymore!")
 
     """old piece of code I'm leaving in here for possible future testing"""
     # print(f"{total_presses} keys in {int(round(total_time, 0))}. CPM: {int(round(cpm, 0))}")
@@ -118,7 +118,7 @@ def count_keys():
 def save_avg(corrected_average, accuracy, average):
     with open("average.txt", "w") as write_avg:
         if accuracy < 100:
-            message = f"Average is: {round(corrected_average)}CPM\nWith an accuracy of: {round(accuracy)}%\nAverage with 100% accuracy: {round(average)}CPM"
+            message = f"Average is: {round(corrected_average)}CPM\nWith an accuracy of: {round(accuracy)}%\n"
             write_avg.write(message)
         else: 
             message = f"Average is: {round(average)}CPM\nWith an accuracy of: 100%"
