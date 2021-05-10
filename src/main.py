@@ -53,13 +53,11 @@ def count_keys():
 
     # Define variables used in function calculations 
     total_presses = len(data.get_log()) - data.get_backspaces()
-    print(total_presses)
 
     starttime = data.get_log()[1]
     endtime = data.get_log()[-1]
 
     total_errors = data.get_backspaces()
-    print(total_errors)
     # Calculate total time of typing activity for "burst"
     total_time = float(endtime) - float(starttime)
 
@@ -69,7 +67,6 @@ def count_keys():
 
     # Calculate CPM with error correction 
     corr_presses = total_presses - total_errors 
-    print(corr_presses)
     corr_cps = corr_presses/total_time
     corr_cpm = corr_cps*60
 
