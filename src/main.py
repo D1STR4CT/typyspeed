@@ -116,10 +116,10 @@ def count_keys():
 def save_avg(corrected_average, accuracy, average):
     with open("average.txt", "w") as write_avg:
         if accuracy < 100:
-            message = f"Average is: {round(data.get_corr_avg())}CPM\nWith an accuracy of: {round(data.get_avg_accuracy())}%\nAverage with 100% accuracy: {round(average)}CPM"
+            message = f"Average is: {round(corrected_average)}CPM\nWith an accuracy of: {round(accuracy)}%\nAverage with 100% accuracy: {round(average)}CPM"
             write_avg.write(message)
         else: 
-            message = f"Average is: {round(data.get_avg())}CPM\nWith an accuracy of: 100%"
+            message = f"Average is: {round(average)}CPM\nWith an accuracy of: 100%"
             write_avg.write(message)
 
 def main(): 
