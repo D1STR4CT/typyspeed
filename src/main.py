@@ -108,7 +108,7 @@ def count_keys():
         data.set_corr_avg(corr_avg)
         avg_accuracy = (accuracy_new+accuracy_old)/2
         data.set_avg_accuracy(avg_accuracy)
-        print(f"average is: {int(round(data.get_avg(), 0))}")
+        print(f"average is: {int(round(data.get_corr_avg(), 0))}")
         save_avg(round(data.get_corr_avg()), round(data.get_avg_accuracy(), 2), round(data.get_avg()))
 
 
