@@ -110,7 +110,7 @@ def count_keys():
         avg_accuracy = (accuracy_new/accuracy_old)/2
         data.set_avg_accuracy(avg_accuracy)
         print(f"average is: {int(round(data.get_avg(), 0))}")
-        save_avg(round(data.get_corr_avg()), round(data.get_avg_accuracy(), 2), data.get_avg())
+        save_avg(round(data.get_corr_avg()), round(data.get_avg_accuracy(), 2), round(data.get_avg()))
 
 
 def save_avg(corrected_average, accuracy, average):
@@ -119,7 +119,7 @@ def save_avg(corrected_average, accuracy, average):
             message = f"Average is: {round(data.get_corr_avg())}CPM\nWith an accuracy of: {round(data.get_avg_accuracy())}%\nAverage with 100% accuracy: {round(average)}CPM"
             write_avg.write(message)
         else: 
-            message = f"Average is: {data.get_avg()}CPM\nWith an accuracy of: {data.get_avg_accuracy()}%"
+            message = f"Average is: {round(data.get_avg())}CPM\nWith an accuracy of: 100%"
             write_avg.write(message)
 
 def main(): 
