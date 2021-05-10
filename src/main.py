@@ -38,16 +38,16 @@ class data_storage:
         self.backspaces = 0
 
 def on_press(key):
+    if key == Key.esc:
+        print(data.get_avg())
+        return False
+
+def on_release(key):
     if key == Key.backspace:
         data.set_backspaces()
         data.append_log(time())
     else: 
         data.append_log(time())
-
-def on_release(key):
-    if key == Key.esc:
-        print(data.get_avg())
-        return False
 
 def count_keys():
 
@@ -116,7 +116,7 @@ def count_keys():
 def save_avg(corrected_average, accuracy, average):
     with open("average.txt", "w") as write_avg:
         if accuracy < 100:
-            message = f"Average is: {data.get_corr_avg()}CPM\nWith an accuracy of: {data.get_avg_accuracy()}%\nAverage with 100% accuracy: {round(average)}CPM"
+            message = f"Average is: {round(data.get_corr_avg())}CPM\nWith an accuracy of: {round(data.get_avg_accuracy())}%\nAverage with 100% accuracy: {round(average)}CPM"
             write_avg.write(message)
         else: 
             message = f"Average is: {data.get_avg()}CPM\nWith an accuracy of: {data.get_avg_accuracy()}%"
