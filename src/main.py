@@ -1,7 +1,7 @@
 from pynput.keyboard import Key, Listener
 from time import time, sleep
 
-class data: 
+class data_storage: 
     def __init__(self, log=[], avg=0 , corr_avg=0, avg_accuracy=0, backspaces=0):
         self.log = log
         self.avg = avg 
@@ -155,7 +155,7 @@ def main():
             data.reset_log()
 
 
-data = data()
+data = data_storage()
 
 if __name__ == "__main__":
     main()
