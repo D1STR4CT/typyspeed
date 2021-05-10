@@ -39,17 +39,9 @@ class data:
 
 def on_press(key):
     if key == Key.backspace:
-        # global backspaces 
-        # backspaces = backspaces + 1 
-        # return backspaces
-        # timestamp = time()
         data.set_backspaces()
         data.append_log(time())
     else: 
-        # global log
-        # log.append(time())
-        # return log
-        # time = time()
         data.append_log(time())
 
 def on_release(key):
@@ -112,7 +104,6 @@ def count_keys():
         data.set_corr_avg(corr_cpm)
         data.set_avg_accuracy(accuracy_new)
     else:
-        # avg = (avg_new+avg_old)/2
         data.set_avg(avg_new)
         corr_avg = (corr_avg_new+corr_avg_old)/2
         data.set_corr_avg(corr_avg)
@@ -120,7 +111,7 @@ def count_keys():
         data.set_avg_accuracy(avg_accuracy)
         print(f"average is: {int(round(data.get_avg(), 0))}")
         save_avg(round(data.get_corr_avg()), round(data.get_avg_accuracy(), 2), data.get_avg())
-        # return avg
+
 
 def save_avg(corrected_average, accuracy, average):
     with open("average.txt", "w") as write_avg:
@@ -132,17 +123,6 @@ def save_avg(corrected_average, accuracy, average):
             write_avg.write(message)
 
 def main(): 
-    # global log 
-    # log = []
-    # global avg
-    # avg = 0.0
-    # global corr_avg
-    # corr_avg = 0.0
-    # global avg_accuracy 
-    # avg_accuracy = 100.0
-    # global backspaces
-    # backspaces = 0 
-
     """ old piece of code I'm leaving in here in case I need it"""
     # with Listener(
     #     on_press = on_press,
