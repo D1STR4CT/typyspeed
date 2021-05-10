@@ -78,7 +78,7 @@ def count_keys():
     This relies on the average amount of letters in a word and differs per language."""
 
     # Print cpm to terminal for testing purposes 
-    print(f"CPM is: {round(corr_cpm)}. with an accuracy of: {round(typing_accuracy, 2)}")
+    print(f"CPM is: {round(corr_cpm)}. with an accuracy of: {round(typing_accuracy, 2)}%")
     if typing_accuracy < 100:
         print(f"CPM can be improved to {round(cpm)} if accuracy is 100%")
     else: 
