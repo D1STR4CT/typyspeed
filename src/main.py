@@ -35,7 +35,7 @@ class data_storage:
     def append_avg(self, average):
         self.avg.append(average)
         if len(self.avg) > 12:
-            self.avg = self.avg.pop[0] # keep list from gettin too long
+            self.avg = self.avg[-12:] # keep list from gettin too long
         else:
             pass 
     def set_corr_avg(self, corrected_average):
@@ -51,7 +51,7 @@ class data_storage:
     def append_accuracy(self, accuracy):
         self.accuracy.append(accuracy)
         if len(self.accuracy) > 12:
-            self.accuracy = self.accuracy.pop[0] # keep list from getting too long
+            self.accuracy = self.accuracy[-12:] # keep list from getting too long
         else: 
             pass
 
